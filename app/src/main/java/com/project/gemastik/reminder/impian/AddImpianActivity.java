@@ -164,7 +164,7 @@ public class AddImpianActivity extends AppCompatActivity {
             hashMap.put("misi",editTextName.getText().toString());
 
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference databaseReference = database.getReference("Detail Impian");
+            DatabaseReference databaseReference = database.getReference("DetailImpian");
 
             databaseReference.child(timeStamp).setValue(hashMap);
 

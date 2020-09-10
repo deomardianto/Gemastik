@@ -15,6 +15,7 @@
         app:cardElevation="8dp">
 
         <TextView
+            android:id="@+id/idku"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hal yang harus dilakukan sehari - hari"
@@ -37,10 +38,10 @@
                 android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_agenda"
+                    android:id="@+id/rv_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/agenda_item"/>
+                    tools:listitem="@layout/detail_impian_item"/>
 
             </RelativeLayout>
         </ScrollView>
