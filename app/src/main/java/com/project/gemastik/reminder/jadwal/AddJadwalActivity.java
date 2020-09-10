@@ -42,13 +42,8 @@ public class AddJadwalActivity extends AppCompatActivity {
     String tipe, personEmail;
     SwitchDateTimeDialogFragment dateTimeDialogFragment;
 
-    List<dataAgenda> list;
-    adapterAgenda adapter;
-
     private FirebaseAuth mAuth;
     FirebaseUser mUser;
-    private DatabaseReference reference;
-    GoogleSignInClient mGoogleSignInClient;
 
     RadioGroup radioGroup;
     RadioButton alarm, notif;

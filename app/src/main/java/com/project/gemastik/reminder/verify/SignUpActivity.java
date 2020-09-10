@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,6 +46,12 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         fAuth = FirebaseAuth.getInstance();
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         signin = findViewById(R.id.btnsignup);
         signin.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +92,7 @@ public class SignUpActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
-            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         } catch (ApiException e) {
@@ -125,7 +132,7 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            Intent intentup = new Intent(SignUpActivity.this, LoginActivity.class);
+                            Intent intentup = new Intent(SignUpActivity.this, MainActivity.class);
                             startActivity(intentup);
                             Toast.makeText(getApplicationContext(),"Berhasil!",Toast.LENGTH_SHORT).show();
                         } else {

@@ -45,9 +45,7 @@ import java.util.List;
  */
 public class JadwalFragment extends Fragment implements DatePickerListener {
 
-    GoogleSignInClient mGoogleSignInClient;
     String personEmail;
-    private FirebaseAuth mAuth;
     FirebaseUser mUser;
     private DatabaseReference reference;
     private RecyclerView mRecycler;
@@ -65,6 +63,9 @@ public class JadwalFragment extends Fragment implements DatePickerListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_jadwal, container, false);
+
+//        mAuth = FirebaseAuth.getInstance();
+//        mUser = mAuth.getCurrentUser();
 
         FloatingActionButton fab = view.findViewById(R.id.fabAddJadwal);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -90,17 +91,17 @@ public class JadwalFragment extends Fragment implements DatePickerListener {
         picker.setBackgroundColor(Color.WHITE);
         picker.setDate(new DateTime());
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestEmail()
+//                .build();
+//
+//        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
         if (acct != null) {
             personEmail = acct.getEmail();
 
         }else {
-            //personEmail = mUser.getEmail();
+            personEmail = mUser.getEmail();
         }
 
         mRecycler = view.findViewById(R.id.rv_agenda);
@@ -112,7 +113,7 @@ public class JadwalFragment extends Fragment implements DatePickerListener {
 
         reference = FirebaseDatabase.getInstance().getReference().child("Agenda");
         Query query = reference.orderByChild("email").equalTo(personEmail);
-        reference.addValueEventListener(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
